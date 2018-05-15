@@ -1,0 +1,33 @@
+
+//Afficher Age de chaque personne, puis la moyenne d’âge des femmes et des hommes
+    // $ageMale=0;
+    // $agefemale=0;
+    $age =0;
+    $requet10 = $connect->query('SELECT birth_date FROM user_list');
+    
+    while ($data10=$requet10->fetch()) 
+    {
+        $date =DateTime::createFromFormat('j/m/Y',$data10['birth_date']);
+        $newDate =$date->format('Y-m-d');
+        $requet11= $connect->prepare('SELECT `first_name`, `first_name`, gender, TIMESTAMPDIFF( YEAR,:dateAge,CURRENT_DATE)AS age 
+        FROM user_list WHERE birth_date= :agedate');
+        
+        $requet11->execute(array('dateAge'=>$newDate,'agedate'=>$data10['birth_date']));
+        
+        while ($data11 = $requet11->fetch()) 
+        {
+            
+            $age+=$data11['age']/1000;
+           
+            /*  if ($data11['gender']==='Male') 
+            {
+                $ageMale+=$data11['age'];
+                echo 'Homme :'.$data11['age'].'<br/>';
+            }
+            else
+            {
+                $agefemale+=$data11['age'];
+                echo  'Femme :'.$data11['age'].'<br/>';
+            } */
+        }
+    }  //echo 'Age moyen : '.$age.'<br>';
