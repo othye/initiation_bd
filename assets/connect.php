@@ -1,7 +1,7 @@
 <?php 
     $serverName = 'localhost';
     $userName = 'root';
-    $password = 'sql-online';
+    $password = '';
     $dbname = 'project1';
 
    /* try {
